@@ -1,151 +1,333 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사유하는 서가</title>
 
-<title>생각이 자라는 책</title>
+  <style>
+    /* 폰트 및 기본 컬러 설정 */
+    :root {
+      --bg: #ffffff;
+      --card-bg: #ffffff;
+      --text-main: #1a1a1a;
+      --text-muted: #666666;
+      --accent: #222222;
+      --border: #eeeeee;
+      --radius: 0px; /* 사유하는 분위기를 위해 각진 디자인 채택 */
+      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
 
-<style>
+    * { 
+      box-sizing: border-box; 
+      word-break: keep-all;
+    }
 
-body{
-font-family: 'Noto Sans KR', sans-serif;
-background:#f5f6fb;
-margin:0;
-text-align:center;
-color:#1f274d;
-}
+    body {
+      margin: 0;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
 
-header{
-background:#1f274d;
-color:white;
-padding:30px;
-}
+    .wrap {
+      max-width: 1100px;
+      margin: 80px auto;
+      padding: 0 24px;
+    }
 
-h1{
-margin:0;
-}
+    /* 헤더 디자인: 여백과 간결함 강조 */
+    header.site {
+      text-align: center;
+      margin-bottom: 80px;
+    }
 
-.container{
-max-width:900px;
-margin:auto;
-padding:40px 20px;
-}
+    header.site h1 {
+      font-size: 36px;
+      font-weight: 300; /* 얇은 폰트 무게로 세련미 강조 */
+      letter-spacing: 0.1em;
+      margin: 0;
+      color: var(--text-main);
+    }
 
-.books{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:30px;
-}
+    header.site p {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
 
-.book{
-background:white;
-border-radius:12px;
-padding:15px;
-box-shadow:0 6px 15px rgba(0,0,0,0.08);
-transition:transform 0.2s;
-}
+    .copy-note {
+      display: inline-block;
+      margin-top: 30px;
+      font-size: 13px;
+      color: #999;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 4px;
+    }
 
-.book:hover{
-transform:translateY(-5px);
-}
+    /* 그리드 및 카드 디자인 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 40px 30px;
+    }
 
-.book img{
-width:100%;
-border-radius:8px;
-}
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid transparent;
+    }
 
-.title{
-font-weight:bold;
-margin-top:12px;
-}
+    .card:hover {
+      transform: translateY(-5px);
+    }
 
-.author{
-font-size:14px;
-opacity:0.7;
-}
+    .cover-wrap {
+      overflow: hidden;
+      background: #f9f9f9;
+      border: 1px solid var(--border);
+    }
 
-.desc{
-font-size:13px;
-margin-top:6px;
-color:#555;
-}
+    .cover {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
 
-</style>
+    .card:hover .cover {
+      transform: scale(1.05);
+    }
+
+    .body {
+      padding: 20px 0; /* 카드 내부 여백 조정 */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #888;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 0;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 600px) {
+      .wrap { margin: 50px auto; }
+      header.site h1 { font-size: 28px; }
+      .grid { gap: 30px 20px; }
+    }
+  </style>
+
+  <script>
+    function goLibrary(title){
+      navigator.clipboard.writeText(title.trim()).catch(()=>{});
+      window.open("https://umyeon.seocholib.or.kr/", "_blank");
+    }
+  </script>
 </head>
 
 <body>
+  <main class="wrap">
 
-<header>
-<h1>생각이 자라는 책</h1>
-<p>우면도서관 북큐레이션</p>
-</header>
+    <header class="site">
+      <h1>사유하는 서가</h1>
+      <p>조용한 사색의 시간, 당신의 마음을 채우는 그림책 큐레이션</p>
+      <span class="copy-note">표지를 클릭하면 제목 복사 후 도서관으로 연결됩니다.</span>
+    </header>
 
-<div class="container">
+    <section class="grid">
+      <article class="card" onclick="goLibrary('바람숲 도서관')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791158362089.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 01</span>
+          <h2 class="title">바람숲 도서관</h2>
+          <p class="subtitle">최지혜, 김성은 · 책읽는곰</p>
+        </div>
+      </article>
 
-<div class="books">
+      <article class="card" onclick="goLibrary('어느 재미있는 월요일')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791161725703.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 02</span>
+          <h2 class="title">어느 재미있는 월요일</h2>
+          <p class="subtitle">잔 마케뉴 · 풀빛</p>
+        </div>
+      </article>
 
+      <article class="card" onclick="goLibrary('인사해요, 안녕!')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791185173498.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 03</span>
+          <h2 class="title">인사해요, 안녕!</h2>
+          <p class="subtitle">김선영 · 키위북스</p>
+        </div>
+      </article>
 
-<a class="book" href="https://lib.seocho.go.kr/umeon/" target="_blank">
+      <article class="card" onclick="goLibrary('완벽한 생일 파티')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191667844.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 04</span>
+          <h2 class="title">완벽한 생일 파티</h2>
+          <p class="subtitle">대니얼 그레이 바넷 · 노란상상</p>
+        </div>
+      </article>
 
-<img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788954624053.jpg">
+      <article class="card" onclick="goLibrary('우주 다녀오겠습니다')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191126198.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 05</span>
+          <h2 class="title">우주 다녀오겠습니다</h2>
+          <p class="subtitle">장선환 · 딸기책방</p>
+        </div>
+      </article>
 
-<div class="title">
-다른 모든 눈송이와 아주 비슷하게 생긴 단 하나의 눈송이
-</div>
+      <article class="card" onclick="goLibrary('축하해 축하해')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791170820291.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 06</span>
+          <h2 class="title">축하해 축하해</h2>
+          <p class="subtitle">이향 · 킨더랜드</p>
+        </div>
+      </article>
 
-<div class="author">
-은희경
-</div>
+      <article class="card" onclick="goLibrary('친구 사귀기')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788955824476.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 07</span>
+          <h2 class="title">친구 사귀기</h2>
+          <p class="subtitle">김영진 · 길벗어린이</p>
+        </div>
+      </article>
 
-<div class="desc">
-삶의 시간 이야기
-</div>
+      <article class="card" onclick="goLibrary('캬오오스! 초대합니다 공룡 놀이공원')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791198332981.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 08</span>
+          <h2 class="title">캬오오스! 초대합니다 공룡 놀이공원</h2>
+          <p class="subtitle">야마시타 코헤이 · 파스텔하우스</p>
+        </div>
+      </article>
 
-</a>
+      <article class="card" onclick="goLibrary('학교 가는 길')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788984141346.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 09</span>
+          <h2 class="title">학교 가는 길</h2>
+          <p class="subtitle">이보나 흐미엘레프스카 · 논장</p>
+        </div>
+      </article>
 
+      <article class="card" onclick="goLibrary('해골 씨의 새집')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193138083.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 10</span>
+          <h2 class="title">해골 씨의 새집</h2>
+          <p class="subtitle">홍지혜 · 고래뱃속</p>
+        </div>
+      </article>
 
-<a class="book" href="https://lib.seocho.go.kr/umeon/" target="_blank">
+      <article class="card" onclick="goLibrary('해님이 웃었어')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791160949131.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 11</span>
+          <h2 class="title">해님이 웃었어</h2>
+          <p class="subtitle">기쿠치 치키 · 사계절</p>
+        </div>
+      </article>
 
-<img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788954646071.jpg">
+      <article class="card" onclick="goLibrary('행복한 ㄱㄴㄷ')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788901163154.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 12</span>
+          <h2 class="title">행복한 ㄱㄴㄷ</h2>
+          <p class="subtitle">최숙희 · 웅진주니어</p>
+        </div>
+      </article>
 
-<div class="title">
-바깥은 여름
-</div>
+      <article class="card" onclick="goLibrary('호랑이 생일날이렷다')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791167550347.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 13</span>
+          <h2 class="title">호랑이 생일날이렷다</h2>
+          <p class="subtitle">강혜숙 · 우리학교</p>
+        </div>
+      </article>
 
-<div class="author">
-김애란
-</div>
+      <article class="card" onclick="goLibrary('안녕')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791163142171.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 14</span>
+          <h2 class="title">안녕</h2>
+          <p class="subtitle">박소정 · 보리출판사</p>
+        </div>
+      </article>
 
-<div class="desc">
-상실과 여름의 기억
-</div>
+      <article class="card" onclick="goLibrary('마음이 퐁퐁퐁')">
+        <div class="cover-wrap">
+          <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791187287407.jpg" />
+        </div>
+        <div class="body">
+          <span class="badge">CURATION 15</span>
+          <h2 class="title">마음이 퐁퐁퐁</h2>
+          <p class="subtitle">김성은 · 천개의바람</p>
+        </div>
+      </article>
 
-</a>
+    </section>
 
-
-<a class="book" href="https://lib.seocho.go.kr/umeon/" target="_blank">
-
-<img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788954650214.jpg">
-
-<div class="title">
-쇼코의 미소
-</div>
-
-<div class="author">
-최은영
-</div>
-
-<div class="desc">
-따뜻한 관계 이야기
-</div>
-
-</a>
-
-
-</div>
-
-</div>
-
+  </main>
 </body>
 </html>
