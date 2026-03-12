@@ -6,16 +6,13 @@
   <title>사유하는 서가</title>
 
   <style>
-    /* 폰트 및 기본 컬러 설정 */
     :root {
       --bg: #ffffff;
       --card-bg: #ffffff;
       --text-main: #1a1a1a;
       --text-muted: #666666;
-      --accent: #222222;
-      --border: #eeeeee;
-      --radius: 0px; /* 사유하는 분위기를 위해 각진 디자인 채택 */
-      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+      --border: #f2f2f2;
+      --radius: 0px;
     }
 
     * { 
@@ -25,7 +22,7 @@
 
     body {
       margin: 0;
-      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       background-color: var(--bg);
       color: var(--text-main);
       line-height: 1.6;
@@ -37,7 +34,6 @@
       padding: 0 24px;
     }
 
-    /* 헤더 디자인: 여백과 간결함 강조 */
     header.site {
       text-align: center;
       margin-bottom: 80px;
@@ -45,10 +41,9 @@
 
     header.site h1 {
       font-size: 36px;
-      font-weight: 300; /* 얇은 폰트 무게로 세련미 강조 */
-      letter-spacing: 0.1em;
+      font-weight: 300;
+      letter-spacing: 0.12em;
       margin: 0;
-      color: var(--text-main);
     }
 
     header.site p {
@@ -62,62 +57,64 @@
       display: inline-block;
       margin-top: 30px;
       font-size: 13px;
-      color: #999;
+      color: #aaa;
       border-bottom: 1px solid #eee;
       padding-bottom: 4px;
     }
 
-    /* 그리드 및 카드 디자인 */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 40px 30px;
+      gap: 50px 30px;
     }
 
     .card {
       background: var(--card-bg);
-      border-radius: var(--radius);
-      overflow: hidden;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
-      border: 1px solid transparent;
     }
 
     .card:hover {
       transform: translateY(-5px);
     }
 
+    /* 이미지 잘림 방지 핵심 수정 부분 */
     .cover-wrap {
+      width: 100%;
+      height: 300px; /* 고정 높이를 주어 정렬 유지 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
-      background: #f9f9f9;
+      background: #fafafa; /* 배경색을 넣어 이미지 여백 보완 */
       border: 1px solid var(--border);
     }
 
     .cover {
       width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
+      height: 100%;
+      object-fit: contain; /* 이미지가 잘리지 않고 전체가 다 보이도록 설정 */
       display: block;
       transition: transform 0.5s ease;
     }
 
     .card:hover .cover {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
 
     .body {
-      padding: 20px 0; /* 카드 내부 여백 조정 */
+      padding: 20px 0;
       display: flex;
       flex-direction: column;
     }
 
     .badge {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.05em;
-      color: #888;
+      letter-spacing: 0.1em;
+      color: #999;
       margin-bottom: 8px;
       text-transform: uppercase;
     }
@@ -131,7 +128,7 @@
     }
 
     .subtitle {
-      margin: 8px 0 0;
+      margin: 6px 0 0;
       font-size: 14px;
       color: var(--text-muted);
     }
@@ -139,7 +136,8 @@
     @media (max-width: 600px) {
       .wrap { margin: 50px auto; }
       header.site h1 { font-size: 28px; }
-      .grid { gap: 30px 20px; }
+      .grid { gap: 40px 20px; }
+      .cover-wrap { height: 260px; }
     }
   </style>
 
@@ -156,19 +154,19 @@
 
     <header class="site">
       <h1>사유하는 서가</h1>
-      <p>조용한 사색의 시간, 당신의 마음을 채우는 그림책 큐레이션</p>
+      <p>조용한 사색의 시간, 당신의 마음을 채우는 문장들</p>
       <span class="copy-note">표지를 클릭하면 제목 복사 후 도서관으로 연결됩니다.</span>
     </header>
 
     <section class="grid">
-      <article class="card" onclick="goLibrary('ai 인문학의 길을 묻다')">
+      <article class="card" onclick="goLibrary('AI 인문학의 길을 묻다')">
         <div class="cover-wrap">
           <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791173351396.jpg" />
         </div>
         <div class="body">
           <span class="badge">CURATION 01</span>
-          <h2 class="title">ai 인문학의 길을 묻다</h2>
-          <p class="subtitle">최지혜, 김성은 · 책읽는곰</p>
+          <h2 class="title">AI, 인문학의 길을 묻다</h2>
+          <p class="subtitle">강용수 · 이담북스</p>
         </div>
       </article>
 
