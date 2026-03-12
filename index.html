@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>우면도서관 북큐레이션</title>
+
+<style>
+
+body{
+font-family: 'Noto Sans KR', sans-serif;
+margin:0;
+background:#f5f6fb;
+color:#1f274d;
+text-align:center;
+}
+
+header{
+background:#1f274d;
+color:white;
+padding:30px;
+}
+
+h1{
+margin:0;
+font-size:28px;
+}
+
+.subtitle{
+margin-top:8px;
+font-size:16px;
+opacity:0.9;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:40px 20px;
+}
+
+.books{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:30px;
+}
+
+.book{
+background:white;
+border-radius:12px;
+padding:15px;
+box-shadow:0 6px 15px rgba(0,0,0,0.08);
+transition:transform 0.2s;
+}
+
+.book:hover{
+transform:translateY(-5px);
+}
+
+.book img{
+width:100%;
+border-radius:8px;
+}
+
+.title{
+font-weight:bold;
+margin-top:12px;
+font-size:15px;
+}
+
+.author{
+font-size:13px;
+opacity:0.7;
+margin-top:4px;
+}
+
+footer{
+margin-top:40px;
+padding:20px;
+font-size:13px;
+opacity:0.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>우면도서관 북큐레이션</h1>
+<div class="subtitle">생각이 자라는 책</div>
+</header>
+
+<div class="container">
+
+<div class="books">
+
+<a class="book" href="https://lib.seocho.go.kr/umeon/" target="_blank">
+
+<img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191114226.jpg">
+
+<div class="title">
+다른 모든 눈송이와 아주 비슷하게 생긴 단 하나의 눈송이
+</div>
+
+<div class="author">
+은희경
+</div>
+
+</a>
+
+
+<a class="book" href="https://lib.seocho.go.kr/umeon/" target="_blank">
+
+<img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788954646071.jpg">
+
+<div class="title">
+바깥은 여름
+</div>
+
+<div class="author">
+김애란
+</div>
+
+</a>
+
+
+<a class="book" href="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788954650214.jpg" target="_blank">
+
+<img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788954650214.jpg">
+
+<div class="title">
+쇼코의 미소
+</div>
+
+<div class="author">
+최은영
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+<footer>
+우면도서관 북큐레이션
+</footer>
+
+</body>
+</html>
